@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>广州市华连达床垫材料店</title>
+<link rel="stylesheet" href="${base}/assets/weui/weui.min.css" />
+<link rel="stylesheet" href="${base}/assets/wechat/swipeSlide.css" />
+<link rel="stylesheet" href="${base}/assets/wap/css/common.css" />
+<style>
+html .weui_media_box.weui_media_text .weui_media_info {
+	color: #888;
+}
+
+html .weui_cell>.weui_cell_bd {
+	font-size: 0.8em;
+	color: #888;
+}
+</style>
+</head>
+<body>
+	<div class="container js_container">
+		<div class="page slideIn tabbar">
+			<div style="height: 100%;" class="bd">
+				<div class="weui_tab">
+					<div class="weui_tab_bd">
+					
+					<?
+						if(product.image!=null&&product.image!="") {
+					?>
+						<div class="slide" id="slide3">
+							<ul>
+								<li><a href="javascript:;"> <img src="${product.image}" alt="">
+								</a></li>
+							</ul>
+							<div class="dot">
+								<span></span>
+							</div>
+						</div>
+					<?
+						}
+					?>
+						<div class="weui_panel">
+							<div class="weui_panel_bd">
+								<div class="weui_media_box weui_media_text">
+									<h4 class="weui_media_title">${product.fullName}</h4>
+									<p class="weui_media_desc" style="color: red;">${product.description}</p>
+									<ul class="weui_media_info">
+										<li class="weui_media_info_meta">编号：${product.sn}</li>
+									</ul>
+									<ul class="weui_media_info">
+										<li class="weui_media_info_meta">分类：${product.productCategory.name}</li>
+										<li class="weui_media_info_meta weui_media_info_meta_extra">库存：${product.stock!"无限制"}</li>
+									</ul>
+									<ul class="weui_media_info">
+										<li class="weui_media_info_meta" style="color: red; font-weight: bold; font-size: 1.2em;">￥
+											${product.price}</li>
+										<li class="weui_media_info_meta"><del>${product.marketPrice}</del></li>
+									</ul>
+								</div>
+
+								<div class="weui_cell">
+									<div class="weui_cell_bd weui_cell_primary">
+										<p>服务：7*24全年午休线上服务</p>
+									</div>
+								</div>
+								<div class="weui_cell">
+									<div class="weui_cell_bd weui_cell_primary">
+										<p>提示：采用顺丰快递</p>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div style="text-align:center;margin: 20px;">
+							<img src="${base}${product.qrCode}" />
+						</div>
+						
+						<article class="weui_article">${product.introduction}</article>
+
+						<div style="height: 60px;"></div>
+					</div>
+
+					<#navbar tab="product" />
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="${base}/assets/wechat/zepto.min.js"></script>
+	<script type="text/javascript" src="${base}/assets/wechat/swipeSlide.min.js"></script>
+	<script type="text/javascript">
+		Zepto(function($) {
+			<?
+				if(product.image!=null&&product.image!="") {
+			?>
+			$('#slide3').swipeSlide({
+				continuousScroll : true,
+				speed : 3000,
+				transitionType : 'cubic-bezier(0.22, 0.69, 0.72, 0.88)',
+				firstCallback : function(i, sum, me) {
+					me.find('.dot').children().first().addClass('cur');
+				},
+				callback : function(i, sum, me) {
+					me.find('.dot').children().eq(i).addClass('cur').siblings().removeClass('cur');
+				}
+			});
+			<?
+				}
+			?>
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>广州市华连达床垫材料店</title>
+<link rel="stylesheet" href="${base}/assets/weui/weui.min.css" />
+<link rel="stylesheet" href="${base}/assets/wechat/swipeSlide.css" />
+<link rel="stylesheet" href="${base}/assets/wap/css/common.css" />
+<style>
+.kad-header {
+	background: #5e6266 none repeat scroll 0 0;
+	color: #fff;
+	font: 14px/40px "黑体";
+	height: 40px;
+	width: 100%;
+}
+
+.kad-tips {
+	line-height: 40px;
+	padding-left: 3.62%;
+	padding-right: 2.9%;
+}
+
+.watch-us-box {
+	float: right;
+	font-size: 0;
+	line-height: 0;
+}
+
+.watch-us-box .watch-us-btn {
+	background: #2d8ef3 none repeat scroll 0 0;
+	border-radius: 4px;
+	height: 25px;
+	line-height: 25px;
+	margin-right: 13px;
+	margin-top: 8px;
+	text-align: center;
+	width: 73px;
+}
+
+.kad-header i {
+	font-style: normal;
+}
+
+.watch-us-box i {
+	display: inline-block;
+	font-size: 14px;
+	line-height: 40px;
+	margin-top: 10px;
+	vertical-align: middle;
+}
+
+.watch-us-box .watch-us-btn a {
+	color: #fff;
+}
+
+.watch-us-box .kad-close-btn {
+	background: rgba(0, 0, 0, 0)
+		url("${base}/assets/wap/images/close_btn01.png") no-repeat scroll 0 0/100%
+		auto;
+	height: 22px;
+	position: relative;
+	text-indent: -999em;
+	width: 22px;
+}
+</style>
+</head>
+<body>
+	<div class="container js_container">
+		<div class="page slideIn tabbar">
+			<div style="height: 100%;" class="bd">
+				<div class="weui_tab">
+					<div class="weui_tab_bd">
+
+						<header class="kad-header">
+							<p class="kad-tips">
+								<span style="float: left;">广州市华连达床垫材料店</span> <span class="watch-us-box"><i class="watch-us-btn"><a
+										href=http://mp.weixin.qq.com/s?__biz=MzIxMzIwMDMwMw==&mid=410875009&idx=1&sn=72e310e9ae843c06eabb556b9ebee740#rd>关注我们</a></i><i
+									id="kad-close-btn" class="kad-close-btn">x</i></span>
+							</p>
+						</header>
+
+						<div class="slide" id="slide3">
+							<ul>
+								<?
+									var adPosition = adPositionFun.findOne(parseLong(4));
+									for(ad in adPosition.ads) {
+								?>
+									<li>
+										<a href="${ad.url!'javascript:;'}"> 
+											<img src="${ad.path}" alt="">
+										</a>
+									</li>
+								<?
+									}
+								?>
+								
+							</ul>
+							<div class="dot">
+								<?
+									for(ad in adPosition.ads) {
+								?>
+									<span></span>
+								<?
+									}
+								?>
+							</div>
+						</div>
+
+						<div id="search_bar" class="weui_search_bar">
+							<form class="weui_search_outer">
+								<div class="weui_search_inner">
+									<i class="weui_icon_search"></i> <input type="search" required="" placeholder="搜索" id="search_input"
+										class="weui_search_input"> <a id="search_clear" class="weui_icon_clear" href="javascript:"></a>
+								</div>
+								<label id="search_text" class="weui_search_text" for="search_input"> <i class="weui_icon_search"></i> <span>搜索</span>
+								</label>
+							</form>
+							<a id="search_cancel" class="weui_search_cancel" href="javascript:">取消</a>
+						</div>
+						<div id="search_show" class="weui_cells weui_cells_access search_show">
+							<div class="weui_cell">
+								<div class="weui_cell_bd weui_cell_primary">
+									<p>实时搜索文本</p>
+								</div>
+							</div>
+							<div class="weui_cell">
+								<div class="weui_cell_bd weui_cell_primary">
+									<p>实时搜索文本</p>
+								</div>
+							</div>
+							<div class="weui_cell">
+								<div class="weui_cell_bd weui_cell_primary">
+									<p>实时搜索文本</p>
+								</div>
+							</div>
+							<div class="weui_cell">
+								<div class="weui_cell_bd weui_cell_primary">
+									<p>实时搜索文本</p>
+								</div>
+							</div>
+						</div>
+
+						<?  
+						   	var productCategories = productCategoryFun.findAll();
+							for(productCategory in productCategories) {
+						?>
+							<div class="weui_panel weui_panel_access">
+								<div class="weui_panel_hd">${productCategory.name}</div>
+								<div class="weui_panel_bd">
+									<?
+										var products = productFun.findByProductCategory(productCategory, 2);
+										for(product in products) {
+									?>
+										<a class="weui_media_box weui_media_appmsg" href="${base}/wap/product/detail?id=${product.id}">
+											<div class="weui_media_hd">
+												<img alt="" src="${thumb(product.image)}" class="weui_media_appmsg_thumb">
+											</div>
+											<div class="weui_media_bd">
+												<h4 class="weui_media_title">${product.name}</h4>
+												<p class="weui_media_desc">${product.description}</p>
+											</div>
+										</a>
+									<?
+										}
+									?>
+									
+								</div>
+								<a href="${base}/wap/product/list?category=${productCategory.id}" class="weui_panel_ft">查看更多</a>
+							</div>
+						<?
+							} elsefor {
+								print("未有记录");
+							}
+						?>
+						
+						
+
+						<div style="height: 60px;"></div>
+					</div>
+					
+					<#navbar tab="home" />
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="${base}/assets/wechat/zepto.min.js"></script>
+	<script type="text/javascript" src="${base}/assets/wechat/swipeSlide.min.js"></script>
+	<script type="text/javascript">
+		Zepto(function($) {
+			$("#search_bar").on("focus", "#search_input", function() {
+				var $weuiSearchBar = $('#search_bar');
+				$weuiSearchBar.addClass('weui_search_focusing');
+			}).on("blur", "#search_input", function() {
+				var $weuiSearchBar = $('#search_bar');
+				$weuiSearchBar.removeClass('weui_search_focusing');
+				if ($(this).val()) {
+					$('#search_text').hide();
+				} else {
+					$('#search_text').show();
+				}
+			}).on("input", "#search_input", function() {
+				var $searchShow = $("#search_show");
+				if ($(this).val()) {
+					$searchShow.show();
+				} else {
+					$searchShow.hide();
+				}
+			}).on("touchend", "#search_cancel", function() {
+				$("#search_show").hide();
+				$('#search_input').val('');
+			}).on("touchend", "#search_clear", function() {
+				$("#search_show").hide();
+				$('#search_input').val('');
+			});
+
+			// demo3
+			$('#slide3').swipeSlide({
+				continuousScroll : true,
+				speed : 3000,
+				transitionType : 'cubic-bezier(0.22, 0.69, 0.72, 0.88)',
+				firstCallback : function(i, sum, me) {
+					me.find('.dot').children().first().addClass('cur');
+				},
+				callback : function(i, sum, me) {
+					me.find('.dot').children().eq(i).addClass('cur').siblings().removeClass('cur');
+				}
+			});
+
+			$("#kad-close-btn").on("click", function() {
+				$(".kad-header").hide();
+			});
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>广州市华连达床垫材料店</title>
+<link rel="stylesheet" href="${base}/assets/weui/weui.min.css" />
+<link rel="stylesheet" href="${base}/assets/wap/css/common.css" />
+</head>
+<body>
+	<div class="container js_container">
+		<div class="page slideIn tabbar">
+			<div style="height: 100%;" class="bd">
+				<div class="weui_tab">
+					<div class="weui_tab_bd">
+
+						<div id="search_bar" class="weui_search_bar">
+							<form class="weui_search_outer">
+								<div class="weui_search_inner">
+									<i class="weui_icon_search"></i> <input type="search" required="" placeholder="搜索" id="search_input"
+										class="weui_search_input"> <a id="search_clear" class="weui_icon_clear" href="javascript:"></a>
+								</div>
+								<label id="search_text" class="weui_search_text" for="search_input"> <i class="weui_icon_search"></i> <span>搜索</span>
+								</label>
+							</form>
+							<a id="search_cancel" class="weui_search_cancel" href="javascript:">取消</a>
+						</div>
+						<div id="search_show" class="weui_cells weui_cells_access search_show">
+							<div class="weui_cell">
+								<div class="weui_cell_bd weui_cell_primary">
+									<p>实时搜索文本</p>
+								</div>
+							</div>
+							<div class="weui_cell">
+								<div class="weui_cell_bd weui_cell_primary">
+									<p>实时搜索文本</p>
+								</div>
+							</div>
+							<div class="weui_cell">
+								<div class="weui_cell_bd weui_cell_primary">
+									<p>实时搜索文本</p>
+								</div>
+							</div>
+							<div class="weui_cell">
+								<div class="weui_cell_bd weui_cell_primary">
+									<p>实时搜索文本</p>
+								</div>
+							</div>
+						</div>
+
+						<div class="weui_panel weui_panel_access">
+							<div class="weui_panel_hd">${productCategory.name}</div>
+							<div class="weui_panel_bd">
+								<?
+									for(product in products.content) {
+								?>
+									<a class="weui_media_box weui_media_appmsg" href="${base}/wap/product/detail?id=${product.id}">
+										<div class="weui_media_hd">
+											<img alt="" src="${thumb(product.image)}" class="weui_media_appmsg_thumb">
+										</div>
+										<div class="weui_media_bd">
+											<h4 class="weui_media_title">${product.name}</h4>
+											<p class="weui_media_desc">${product.description}</p>
+										</div>
+									</a>
+								<?
+									} elsefor {
+										print("没有数据");
+									}
+								?>
+
+							</div>
+							<div class="weui_cell" style="font-size: 0.8em;">
+								<div class="weui_cell_bd weui_cell_primary">
+									<p style="text-align: center;">第${products.number+1}/${products.totalPages}页, 共${products.totalElements}条记录</p>
+									<div class="button_sp_area">
+										<a class="weui_btn weui_btn_primary${products.first?' weui_btn_disabled'}" href="${products.first?'javascript:;':base+'/wap/product/list?category='+productCategory.id+'&page='+products.number}">上一页</a>
+										<a class="weui_btn weui_btn_primary${products.last?' weui_btn_disabled'}" href="${products.last?'javascript:;':base+'/wap/product/list?category='+productCategory.id+'&page='+products.number+2}">下一页</a>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div style="height: 60px;"></div>
+					</div>
+
+					<#navbar tab="product" />
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="${base}/assets/wechat/zepto.min.js"></script>
+	<script type="text/javascript" src="${base}/assets/wechat/swipeSlide.min.js"></script>
+	<script type="text/javascript">
+		Zepto(function($) {
+			$("#search_bar").on("focus", "#search_input", function() {
+				var $weuiSearchBar = $('#search_bar');
+				$weuiSearchBar.addClass('weui_search_focusing');
+			}).on("blur", "#search_input", function() {
+				var $weuiSearchBar = $('#search_bar');
+				$weuiSearchBar.removeClass('weui_search_focusing');
+				if ($(this).val()) {
+					$('#search_text').hide();
+				} else {
+					$('#search_text').show();
+				}
+			}).on("input", "#search_input", function() {
+				var $searchShow = $("#search_show");
+				if ($(this).val()) {
+					$searchShow.show();
+				} else {
+					$searchShow.hide();
+				}
+			}).on("touchend", "#search_cancel", function() {
+				$("#search_show").hide();
+				$('#search_input').val('');
+			}).on("touchend", "#search_clear", function() {
+				$("#search_show").hide();
+				$('#search_input').val('');
+			});
+		})
+	</script>
+</body>
+</html>
